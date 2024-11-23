@@ -1,14 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const ProductForm = ({ product, onClose, onSave }) => {
-  const [name, setName] = useState(product ? product.name : '');
-  const [category, setCategory] = useState(product ? product.category : '');
-  const [quantity, setQuantity] = useState(product ? product.quantity : '');
+  const [name, setName] = useState('');
+  const [category, setCategory] = useState('');
+  const [quantity, setQuantity] = useState('');
+
+  useEffect(() => {
+    if (product) {
+      setName(product.name);
+      setCategory(product.category);
+      setQuantity(product.quantity);
+    }
+  }, [product]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const newProduct = {
-      id: product ? product.id : null,
+      _id: product ? product._id : null,
       name,
       category,
       quantity,

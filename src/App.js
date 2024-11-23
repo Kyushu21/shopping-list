@@ -35,8 +35,8 @@ function App() {
   };
 
   const handleSaveProduct = async (product) => {
-    const response = await fetch(`http://localhost:5000/products${product.id ? `/${product.id}` : ''}`, {
-      method: product.id ? 'PUT' : 'POST',
+    const response = await fetch(`http://localhost:5000/products${product._id ? `/${product._id}` : ''}`, {
+      method: product._id ? 'PUT' : 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -44,8 +44,8 @@ function App() {
     });
     const data = await response.json();
     setShoppingList((prevList) =>
-      product.id
-        ? prevList.map((item) => (item._id === product.id ? data : item))
+      product._id
+        ? prevList.map((item) => (item._id === product._id ? data : item))
         : [...prevList, data]
     );
     setIsFormOpen(false);
